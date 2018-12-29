@@ -1,0 +1,33 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    
+    "tasks": [
+        {
+            "label": "Build docker-compose",
+            "type": "shell",
+            "command": "${workspaceRoot}\\docker-build.bat",
+            "windows": {
+                "command": "${workspaceRoot}\\docker-build.bat"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "panel": "dedicated"
+            },
+        },
+        {
+            "label": "Show logs [Docker]",
+            "type": "shell",
+            "command": "docker",
+            "args": [ "logs", "-f", "pushkin.api" ],
+            "problemMatcher": [],
+            "presentation": {
+                "panel": "dedicated"
+            }
+        }
+    ]
+}

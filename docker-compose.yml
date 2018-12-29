@@ -1,0 +1,21 @@
+version: '3.4'
+
+services:
+  pushkin.api:
+    image: ${DOCKER_REGISTRY}krzyhook/pushkin.api
+    build:
+      context: .
+      dockerfile: app/Dockerfile
+
+  db.postgres:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: SecretLocalPassword
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: a
+      PGADMIN_DEFAULT_PASSWORD: a
+    restart: unless-stopped

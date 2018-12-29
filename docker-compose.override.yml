@@ -1,0 +1,51 @@
+version: '3.4'
+
+services:
+  pushkin.api:
+    container_name: pushkin.api
+    environment:
+      PGHOST: db.postgres
+      PGPORT: 5432
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      PGSSLMODE: prefer
+      PGDATABASE: postgres
+      Database_db_name: pushkin
+      ServerSpecific_game: pushkin.api.dev
+      ServerSpecific_world_id: 1
+      Messenger_dry_run: 'false'
+      Messenger_apns_topic: com.example.dev
+      Messenger_apns_certificate_path: /app/cert/app_push_dev.pem
+      Messenger_apns_sandbox: 'true'
+      Messenger_base_deeplink_url: dev.example.com
+    volumes:
+      - ./certs/apn_push:/app/cert:ro
+    links:
+      - db.postgres
+    depends_on:
+      - db.postgres
+    ports:
+      - "44009:8887"
+
+  db.postgres:
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  pgadmin:
+    depends_on:
+      - db.postgres
+    restart: unless-stopped
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=postgres@postgresql.org
+      - PGADMIN_DEFAULT_PASSWORD=postgres
+    ports:
+      - "9999:80"
+
+volumes:
+  postgres-data:
