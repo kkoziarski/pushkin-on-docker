@@ -25,9 +25,10 @@ services:
     depends_on:
       - db.postgres
     ports:
-      - "44009:8887"
+      - "44001:8887"
 
   db.postgres:
+    container_name: db.postgres
     restart: always
     environment:
       POSTGRES_USER: postgres
@@ -38,12 +39,13 @@ services:
       - postgres-data:/var/lib/postgresql/data
 
   pgadmin:
+    container_name: pgadmin
     depends_on:
       - db.postgres
     restart: unless-stopped
     environment:
-      - PGADMIN_DEFAULT_EMAIL=postgres@postgresql.org
-      - PGADMIN_DEFAULT_PASSWORD=postgres
+      - PGADMIN_DEFAULT_EMAIL=admin@postgres.org
+      - PGADMIN_DEFAULT_PASSWORD=SecretLocalPasswordPgAdmin
     ports:
       - "9999:80"
 
