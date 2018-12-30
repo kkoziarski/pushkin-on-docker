@@ -74,7 +74,7 @@ def init(configuration_file):
     global gcm_sender_queue_handler_url
     global notification_post_processor_queue_handler_url
 
-    config = ConfigParser.ConfigParser()
+    config = ConfigParser.ConfigParser(os.environ)
     config.read(configuration_file)
 
     # server/game specifics
