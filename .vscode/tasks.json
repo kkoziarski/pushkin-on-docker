@@ -7,9 +7,12 @@
         {
             "label": "Build docker-compose",
             "type": "shell",
-            "command": "${workspaceRoot}\\docker-build.bat",
+            // "command": "${workspaceRoot}\\docker-build.bat",
             "windows": {
                 "command": "${workspaceRoot}\\docker-build.bat"
+            },
+            "linux": {
+                "command": "${workspaceRoot}/docker-build.sh"
             },
             "group": {
                 "kind": "build",
