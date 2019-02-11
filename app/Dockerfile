@@ -7,7 +7,7 @@ RUN apk add --no-cache --virtual .build-deps \
     musl-dev \
     postgresql-dev \
     python-dev \
-    && pip install --no-cache-dir psycopg2 \
+    && pip install --no-cache-dir -Iv psycopg2==2.7.6.1 \
     && apk add --no-cache postgresql-client \
     && apk del --no-cache .build-deps
 
